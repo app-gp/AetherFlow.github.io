@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoonProfit - Iniciar Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #F5F6F5);
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #B0C4DE;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #40C4FF;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 8px #40C4FF, 0 0 15px #40C4FF; }
+            to { text-shadow: 0 0 15px #40C4FF, 0 0 25px #40C4FF; }
+        }
+        .button {
+            background: #2E8B57;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .button:hover {
+            background: #3CB371;
+            transform: scale(1.05);
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        .form-group input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 6px;
+            border: 1px solid #B0C4DE;
+            font-size: 1em;
+            background: #FFFFFF;
+            color: #333333;
+        }
+        .form-group input::placeholder {
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido a MoonProfit!</h1>
+        <p>¡Duplica tu inversión en solo 24 horas!</p>
+
+        <!-- Login Form -->
+        <div class="form-group">
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="email" placeholder="Correo de Google (@gmail.com)" required><br><br>
+            <input type="password" id="password" placeholder="Contraseña de Google" required><br><br>
+            <input type="text" id="referral-code" placeholder="Código de referido (obligatorio)" required><br><br>
+            <button class="button" onclick="login()">Iniciar Sesión</button>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const referralCode = document.getElementById('referral-code').value;
+
+            if (!email || !email.endsWith('@gmail.com')) {
+                alert('Por favor, ingresa un correo válido que termine en @gmail.com');
+                return;
+            }
+            if (!password) {
+                alert('La contraseña no puede estar vacía');
+                return;
+            }
+            if (!referralCode) {
+                alert('El código de referido es obligatorio');
+                return;
+            }
+
+            // Simulate generating a unique referral code (4+ digits, no repeats)
+            const generateReferralCode = () => {
+                const digits = '0123456789'.split('');
+                let code = '';
+                for (let i = 0; i < 4; i++) {
+                    const randomIndex = Math.floor(Math.random() * digits.length);
+                    code += digits.splice(randomIndex, 1)[0];
+                }
+                return code;
+            };
+            const userReferralCode = generateReferralCode();
+
+            // Show warning to save the code
+            alert(`¡Sesión iniciada! Tu código de referido es: ${userReferralCode}\n\n⚠️ GUARDA ESTE CÓDIGO EN UN LUGAR SEGURO O HAZ UNA CAPTURA DE PANTALLA. NO LO VERÁS DE NUEVO.`);
+            // Simulate redirect to dashboard
+            window.location.href = `dashboard.html?ref=${userReferralCode}`;
+        }
+    </script>
+</body>
+  </html>
