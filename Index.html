@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title-text">Registro - AetherFlow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-dark-bg: #1e1e1e;
+            --color-card-bg: #2b2b3b;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #aaaaaa;
+            --color-accent-orange: #ff6600;
+            --color-accent-dark: #333333;
+            --color-input-bg: #3c3c50;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-primary);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to the top for better mobile view */
+            min-height: 100vh;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGZpbHRlciBpZD0iZmlsdGVyMSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJub1N0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyYjJkMzIiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZmlsdGVyMSkiIG9wYWNpdHk9IjAuMiIvPjwvc3ZnPg=='); /* Subtle dark pattern background */
+            background-size: cover;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Header elements */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .language-select {
+            color: var(--color-text-primary);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer; /* Added cursor to indicate clickability */
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-content {
+            /* Placeholder for the AetherFlow logo (modern, abstract) */
+            width: 50px;
+            height: 50px;
+            background-color: #007bff; /* Blue color for AetherFlow */
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .logo-content::before, .logo-content::after {
+            content: '';
+            position: absolute;
+            background: radial-gradient(circle, white 10%, transparent 10%), #007bff;
+            background-size: 10px 10px;
+            border-radius: 50%;
+        }
+        
+        .logo-content::before {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: scale(0.6);
+        }
+        
+        .logo-content::after {
+            content: 'AF';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Asegurar centrado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .logo-text {
+            font-size: 8px;
+            color: var(--color-dark-bg);
+            position: absolute;
+            bottom: -15px;
+            white-space: nowrap;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Card/Form container */
+        .form-card {
+            background-color: var(--color-card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tab/Toggle switch */
+        .tab-switch {
+            display: flex;
+            background-color: var(--color-accent-dark);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+
+        .tab-button {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+            color: var(--color-text-secondary);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(to right, #ff8c00, var(--color-accent-orange));
+            color: var(--color-text-primary);
+            box-shadow: 0 2px 10px rgba(255, 102, 0, 0.5);
+        }
+
+        /* Form fields */
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-label {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .input-field {
+            background-color: var(--color-input-bg);
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+
+        .input-field:focus {
+            box-shadow: 0 0 0 2px var(--color-accent-orange);
+        }
+
+        .password-group {
+            display: flex;
+            align-items: center;
+            background-color: var(--color-input-bg);
+            border-radius: 10px;
+            padding: 0 15px;
+        }
+
+        .password-group input {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            padding: 15px 0;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            padding: 0 5px;
+        }
+
+        .password-toggle i {
+            font-size: 18px;
+        }
+
+        /* Invitation Code Field - The one with '955985' */
+        .invitation-code-group { /* Revert to standard input field style */
+            background-color: var(--color-input-bg);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--color-text-primary);
+            margin-bottom: 25px;
+        }
+
+        /* Register Button */
+        .register-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(to right, #ff8c00, var(--color-accent-orange));
+            color: var(--color-text-primary);
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        .register-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Footer/Login link */
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .footer-links a {
+            color: var(--color-accent-orange);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="language-select" id="language-toggle">
+            <i class="fas fa-globe"></i>
+            <span id="current-language">Español</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-circle">
+                <div class="logo-content">
+                </div>
+            </div>
+            <h1 id="app-title">AetherFlow</h1>
+        </div>
+
+        <div class="form-card">
+            <div class="tab-switch">
+                <div class="tab-button active" id="tab-email" data-lang-key="email_tab">Correo electrónico</div>
+                <div class="tab-button" id="tab-mobile" data-lang-key="mobile_tab">Móvil</div>
+            </div>
+
+            <form id="registration-form">
+                <!-- Fields for Correo electrónico tab -->
+                <div id="email-fields">
+                    <div class="form-group">
+                        <input type="email" class="input-field" id="email" name="email" data-lang-key="email_placeholder" placeholder="Correo electrónico" required>
+                    </div>
+                </div>
+
+                <!-- Fields for Móvil tab - Hidden by default -->
+                <div id="mobile-fields" style="display: none;">
+                    <div class="form-group">
+                        <input type="tel" class="input-field" id="mobile" name="mobile" data-lang-key="mobile_placeholder" placeholder="Número de móvil" pattern="[0-9]{9,15}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="password-group">
+                        <input type="password" id="password" name="password" data-lang-key="login_password_placeholder" placeholder="Contraseña de inicio de sesión" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('password')">
+                            <i class="far fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="password-group">
+                        <input type="password" id="security-password" name="security-password" data-lang-key="security_password_placeholder" placeholder="Contraseña de seguridad" required>
+                        <span class="password-toggle" onclick="togglePasswordVisibility('security-password')">
+                            <i class="far fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- Campo de referido funcional -->
+                    <input type="text" class="input-field" id="invitation-code" name="invitation-code" data-lang-key="referral_code_placeholder" placeholder="Código de referido" required>
+                </div>
+
+                <button type="submit" class="register-button" id="register-button" data-lang-key="register_button">REGISTRO</button>
+            </form>
+
+            <div class="footer-links">
+                <span id="login-prompt" data-lang-key="login_prompt">¿Ya tienes una cuenta?</span><a href="#" id="login-link" data-lang-key="login_link">Acceso</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Objeto de traducción con todos los textos de la interfaz
+        const translations = {
+            es: {
+                title_text: "Registro - AetherFlow",
+                current_language: "Español",
+                email_tab: "Correo electrónico",
+                mobile_tab: "Móvil",
+                email_placeholder: "Correo electrónico",
+                mobile_placeholder: "Número de móvil",
+                login_password_placeholder: "Contraseña de inicio de sesión",
+                security_password_placeholder: "Contraseña de seguridad",
+                referral_code_placeholder: "Código de referido",
+                register_button: "REGISTRO",
+                login_prompt: "¿Ya tienes una cuenta?",
+                login_link: "Acceso",
+                alert_submit: "Formulario de REGISTRO enviado (funcionalidad simulada).",
+                alert_login: "Redirigiendo a la página de ACCESO (funcionalidad simulada)."
+            },
+            en: {
+                title_text: "Register - AetherFlow",
+                current_language: "English",
+                email_tab: "Email",
+                mobile_tab: "Mobile",
+                email_placeholder: "Email",
+                mobile_placeholder: "Mobile Number",
+                login_password_placeholder: "Login Password",
+                security_password_placeholder: "Security Password",
+                referral_code_placeholder: "Referral Code",
+                register_button: "REGISTER",
+                login_prompt: "Already have an account?",
+                login_link: "Login",
+                alert_submit: "REGISTRATION form submitted (simulated functionality).",
+                alert_login: "Redirecting to LOGIN page (simulated functionality)."
+            }
+        };
+
+        let currentLang = 'es';
+
+        // Función principal para aplicar la traducción
+        function setLanguage(lang) {
+            const langData = translations[lang];
+            if (!langData) return;
+
+            // 1. Actualizar el atributo lang del HTML
+            document.documentElement.lang = lang;
+            currentLang = lang;
+
+            // 2. Actualizar el título de la página
+            document.getElementById('title-text').textContent = langData.title_text;
+            
+            // 3. Actualizar el selector de idioma
+            document.getElementById('current-language').textContent = langData.current_language;
+
+            // 4. Actualizar textos usando data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                const text = langData[key];
+
+                if (element.tagName === 'INPUT') {
+                    // Para campos de entrada (placeholders)
+                    element.placeholder = text;
+                } else if (element.tagName === 'BUTTON') {
+                    // Para botones
+                    element.textContent = text;
+                } else {
+                    // Para otros elementos (tabs, prompts, links)
+                    element.textContent = text;
+                }
+            });
+        }
+
+        // Function to toggle password visibility (kept from previous version)
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = field.nextElementSibling; // The span with the eye icon
+            const icon = toggle.querySelector('i');
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailTab = document.getElementById('tab-email');
+            const mobileTab = document.getElementById('tab-mobile');
+            const emailFields = document.getElementById('email-fields');
+            const mobileFields = document.getElementById('mobile-fields');
+            const form = document.getElementById('registration-form');
+            const langToggle = document.getElementById('language-toggle');
+
+            // Inicializar el idioma en español al cargar
+            setLanguage('es');
+
+            // Función para alternar el idioma
+            langToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                setLanguage(newLang);
+                
+                // Mostrar alerta de cambio de idioma (simulado)
+                alert(`Idioma cambiado a ${newLang === 'es' ? 'Español' : 'English'}`);
+            });
+
+            // Función para el cambio de pestañas (manteniendo la funcionalidad)
+            function switchTab(activeTab, inactiveTab, activeFields, inactiveFields) {
+                activeTab.classList.add('active');
+                inactiveTab.classList.remove('active');
+                activeFields.style.display = 'block';
+                inactiveFields.style.display = 'none';
+
+                console.log(`Switched to ${activeTab.textContent} registration`);
+            }
+
+            emailTab.addEventListener('click', () => {
+                switchTab(emailTab, mobileTab, emailFields, mobileFields);
+            });
+
+            mobileTab.addEventListener('click', () => {
+                switchTab(mobileTab, emailTab, mobileFields, emailFields);
+            });
+
+            // Handle form submission (funcionalidad simulada)
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert(translations[currentLang].alert_submit);
+            });
+
+            // Handle Acceso link (funcionalidad simulada)
+            document.getElementById('login-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert(translations[currentLang].alert_login);
+            });
+        });
+    </script>
+</body>
+</html>
